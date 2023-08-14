@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>THẾ GIỚI DƯA LƯỚI</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="css/reset.css">
+  <style>
+    .login-container {
+      zoom: 100%;
+      width: 400px;
+      margin: 400px auto;
+      padding: 20px;
+      background-color: #f1f1f1;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .login-container label,
+    .login-container input[type="text"],
+    .login-container input[type="password"],
+    .login-container input[type="submit"] {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .login-container input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .content-container {
+      display: none;
+      padding: 20px;
+      background-color: #f1f1f1;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+
+  <script>
+    function encodeURL() {
+      var url = document.getElementById('urlInput').value;
+      var encodedUrl = encodeURIComponent(url);
+      document.getElementById('encodedUrl').innerText = encodedUrl;
+    }
+  </script>
+</head>
+<body>
+  <div class="login-container">
+    <form onsubmit="login(); return false;">
+      <label for="username">Tên đăng nhập:</label>
+      <input type="text" id="username" name="username" required>
+
+      <label for="password">Mật khẩu:</label>
+      <input type="password" id="password" name="password" required>
+      <p>Lượt đăng nhập: <span id="luotdangnhap"></span></p>
+      <input type="submit" value="Đăng nhập">
+    </form>
+  </div>
+
+<!-- 
+  ********************************TRANG CHÍNH********************************************
+  ***************************************************************************************
+-->
+<div class="content-container" id="contentContainer">
+  <head>
+    <style>
+      /* Style nav tabs*/
+      .tabs{
+        border-bottom: 1px solid #ddd;
+        margin: 0 auto;
+      }
+      .nav-tabs{
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        border-bottom: 3px solid #ffffff;
+        background-color: #f1f1f1;
+      }
+      .nav-tabs li{
+        display: inline-block;
+      }
+      .nav-tabs li a{
+        display: block;  
+        padding: 10px 20px;
+        text-decoration: none;
+        position: relative;
+      }
+      .nav-tabs li a::after{
+        content: "";
+        height: 3px;
+        width: 100%;
+        position: absolute;
+        left: 0px;
+        bottom: -3px;
+        background: transparent; 
+      }
+      .nav-tabs li.active a::after, .nav-tabs li:hover a::after{
+        background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);;
+        
+      }
+    
+      /* STYLE tab-content*/
+      .tab-content{
+        padding: 20px 0px;
+      }
+  </style>
+    
+  <style>
+    *{
+      box-sizing: border-box;
+    }
+    
+    body {
+      zoom: 65%;
+      font-size: 16px;
+      width: 80%; /* Thay đổi kích thước theo mong muốn */
+      margin: 0 auto; /* Căn giữa trang */
+      background-image: url('image/nen.jpg'); /* Đường dẫn tới hình nền của bạn */
+      background-size: cover; /* Đảm bảo hình nền bao phủ toàn bộ trang */
+      background-position: center center; /* Canh giữa hình nền */
+      background-repeat: repeat; /* lặp lại hình nền */
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* Header/Blog Title */
+    .header {
+      padding: 30px;
+      text-align: center;
+      position: relative;
+      height: 500px; /* Chiều cao của header */
+    }
+    
+    .header h1 {
+      font-size: 50px;
+    }
+
+    .header p {
+      font-size: 20px;
+    }
+    
+    /* Style the top navigation bar */
+    .topnav {
+      overflow: hidden;
+      background-color: #333;
+    }
+    
+    /* Style the topnav links */
+    .topnav a {
+      float: left;
+      display: block;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 14px 18px;
+      text-decoration: none;
+    }
+    
+    /* Change color on hover */
+    .topnav a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+    
+    /* Create two unequal columns that floats next to each other */
+    /* Left column */
+    .leftcolumn {   
+      float: left;
+      width: 75%;
+    }
+    
+    /* Right column */
+    .rightcolumn {
+      float: right;
+      width: 24%;
+      background-color: #f1f1f1;
+      padding-right: 0px;
+    }
+    
+    /* Fake image */
+    .fakeimg {
+      background-color: #aaa;
+      width: 100%;
+      padding: 20px;
+    }
+    
+    /* Add a card effect for articles */
+    .card {
+      background-color: white;
+      padding: 20px;
+      margin-top: 0px;
+    }
+    
+    /* Clear floats after the columns */
+    .row::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+    
+    /* Footer */
+    .footer {
+      padding: 20px;
+      text-align: center;
+      background: #ddd;
+      margin-top: 20px;
+    }
+    
+    /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+    @media screen and (max-width: 800px) {
+      .leftcolumn, .rightcolumn {   
+        width: 100%;
+        padding: 0;
+      }
+    }
+    
+    /* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+    @media screen and (max-width: 400px) {
+      .topnav a {
+        float: none;
+        width: 100%;
+      }
+    }
+
+
+    /* H1 */
+    @keyframes rainbow-effect {
+      0% {
+        color: red;
+      }
+      14% {
+        color: orange;
+      }
+      28% {
+        color: yellow;
+      }
+      42% {
+        color: rgb(117, 202, 117);
+      }
+      57% {
+        color: blue;
+      }
+      71% {
+        color: indigo;
+      }
+      85% {
+        color: violet;
+      }
+      100% {
+        color: red;
+      }
+    }
+    .rainbow-text {
+      animation: rainbow-effect 5s linear infinite;
+    }
+    
+    
+    /* Style the video container */
+    .video-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    
+    /* Style the video */
+    .video-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    /* Style the content on top of the video */
+    .header-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+      font-size: 24px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 5);
+    }
+    
+    /*slide hình ảnh*/
+    .container {
+      zoom: 75%;
+      margin: 0 auto; /* Căn giữa trang */
+      width: 800px;
+      height: 500px;
+      overflow: hidden;
+    }
+    
+    .image-slider {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      animation: slide 10s infinite;
+    }
+    
+    @keyframes slide {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-1450px);
+      }
+    }
+    
+    .image-slider img {
+      width: 800px;
+      height: 500px;
+    }
+
+    table, th, td {
+      border:1px solid black;
+    }
+    /*Nút nhấn 7 màu*/
+    .glow-on-hover {
+      width: 220px;
+      height: 50px;
+      border: none;
+      outline: none;
+      color: #fff;
+      background: #111;
+      cursor: pointer;
+      position: relative;
+      z-index: 0;
+      border-radius: 10px;
+    }
+    .glow-on-hover:before {
+      content: '';
+      background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+      position: absolute;
+      top: -2px;
+      left:-2px;
+      background-size: 400%;
+      z-index: -1;
+      filter: blur(5px);
+      width: calc(100% + 4px);
+      height: calc(100% + 4px);
+      animation: glowing 20s linear infinite;
+      opacity: 0;
+      transition: opacity .3s ease-in-out;
+      border-radius: 10px;
+    }
+    .glow-on-hover:active {
+      color: #000
+    } 
+    .glow-on-hover:active:after {
+      background: transparent;
+    }
+    .glow-on-hover:hover:before {
+      opacity: 1;
+    }
+    .glow-on-hover:after {
+      z-index: -1;
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #111;
+      left: 0;
+      top: 0;
+      border-radius: 10px;
+    }
+    @keyframes glowing {
+        0% { background-position: 0 0; }
+        50% { background-position: 400% 0; }
+        100% { background-position: 0 0; }
+    }
+
+    /*Nút nhấn đăng xuất*/
+    .glow-on-hover1 {
+      width: 100px;
+      height: 42px;
+      border: none;
+      outline: none;
+      color: #000000;
+      background: #00ff00;
+      cursor: pointer;
+      position: relative;
+      z-index: 0;
+      border-radius: 10px;
+    }
+    .glow-on-hover1:before {
+      content: '';
+      background: linear-gradient(30deg, #ffffff, #00ff40);
+      position: absolute;
+      top: -2px;
+      left:-2px;
+      background-size: 400%;
+      z-index: -1;
+      filter: blur(5px);
+      width: calc(100% + 4px);
+      height: calc(100% + 4px);
+      animation: glowing 5s linear infinite;
+      opacity: 0;
+      transition: opacity .1s ease-in-out;
+      border-radius: 10px;
+    }
+    .glow-on-hover1:active {
+      color: #a1c9a4
+    } 
+    .glow-on-hover1:active:after {
+      background: transparent;
+    }
+    .glow-on-hover1:hover:before {
+      opacity: 1;
+    }
+    .glow-on-hover1:after {
+      z-index: -1;
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #8cc493;
+      left: 0;
+      top: 0;
+      border-radius: 10px;
+    }
+  </style>
+  </head>
+  <body>
+
+
+<div class="overlay" id="overlay" style="display: none;">
+  <div class="notification">
+    <h1>Giá trị vượt ngưỡng!</h1>
+    <p>Giá trị đã vượt qua ngưỡng bạn đặt trước.</p>
+    <button onclick="hideNotification()">Đóng</button>
+  </div>
+</div>
+    
+    <div class="header">
+      <div class="video-container">
+        <video src="video/nen.mp4" autoplay loop muted type="video/mp4"></video>
+      </div> 
+      
+      <div class="header-content">
+        <h1 class="rainbow-text" style="font-size:150px">Thế giới<br>Dưa lưới</h1>
+      </div>
+    </div>
+    
+    
+      <ul class="nav-tabs">
+        <li class="active"><a href="#menu_1">Giới thiệu</a></li>
+        <li><a href="#menu_2">Hướng dẫn trồng cây</a></li>
+        <li><a href="#menu_3">Theo dõi cây trồng</a></li>
+        <li><a href="#menu_4" >Liên hệ</a></li>
+        <li style="float:right"><button class="glow-on-hover1" onclick="logout(),resetSlider()">Đăng xuất</button></li>
+      </ul>
+      
+      <div class="tab-content">
+        <div id="menu_1" class="tab-content-item">
+          <div class="row">
+            <div class="leftcolumn">
+              <div class="card">
+                <h2>Giới thiệu</h2>
+
+                  <div class="container">
+                    <div class="image-slider">
+                      <img src="image/yasuo.jpg" alt="image">
+                      <img src="image/jihn.jpg" alt="image">
+                      <img src="image/kata.jpg" alt="image">
+                    </div>
+                  </div>
+                <p> </p>
+                <p>Cây dưa lưới, tên khoa học là Cucumis melo var. reticulatus, là một loại cây trồng thường được trồng vì trái dưa lưới ngọt mát và hương vị tuyệt vời. Nó thuộc họ Cucurbitaceae và có nguồn gốc từ khu vực Đông Nam Á.</p>
+                <p>Cây dưa lưới có thân leo dài, mềm mại và có các cành phân nhánh. Lá của cây có hình trái tim và có màu xanh tươi. Hoa dưa lưới thường có màu vàng và tập trung thành các chùm hoa.</p>
+                <p>Quả dưa lưới là điểm nhấn chính của cây. Chúng có hình dạng tròn, vỏ ngoài màu vàng nhạt và có các vệt màu xanh nhạt tạo thành một mạng lưới. Vì vậy, được gọi là "dưa lưới". Thịt của quả dưa lưới mịn màng, mọng nước và có một hương vị ngọt ngào đặc trưng.</p>
+                <p>Cây dưa lưới có thể được trồng trong nhiều vùng khí hậu khác nhau, nhưng thích hợp nhất là vùng nhiệt đới và ôn đới ấm. Nó yêu cầu ánh sáng mặt trời đầy đủ và nhiệt độ ấm áp để phát triển tốt. Cây thường được trồng từ hạt hoặc trồng từ cây giâm cành.</p>
+                <p>Dưa lưới là một loại cây trồng phổ biến trong nông nghiệp và được sử dụng rộng rãi trong ẩm thực. Chúng có thể được ăn tươi, sử dụng trong các món trái cây, salad, nước ép và là thành phần quan trọng trong các món tráng miệng. Ngoài ra, quả dưa lưới cũng giàu chất chống oxy hóa, vitamin C và chất xơ, mang lại lợi ích sức khỏe cho người tiêu dùng.</p>
+                <p>Cây dưa lưới thường có khả năng sinh trưởng nhanh và sản xuất quả sau khoảng 60-90 ngày sau khi trồng. Để trồng thành công cây dưa lưới, cần cung cấp đủ nước, đất giàu dinh dưỡng và kiểm soát sâu bệnh hiệu quả.</p>
+              </div>
+            </div>
+          
+            <div class="rightcolumn">
+              <div class="card">
+                <style>
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+                  .notification {
+                    padding: 20px;
+                    background-color: #fff;
+                    border-radius: 5px;
+                    text-align: center;
+                  }
+                </style>
+                <h2>Thời tiết</h2>
+                <p>Nhiệt độ: <span id="nhietdo"></span>*C</p>
+                <p>Độ ẩm: <span id="doam"></span>%</p>
+                <label>Trạng thái máy bơm nước:</label>
+                <input type="range" id="slider" min="0" max="255" step="1" value="0">
+                <span id="Motormaybomnuoc">0</span>
+                <label>Trạng thái che nắng: </label>
+                <input type="range" id="slider1" min="0" max="255" step="1" value="0">
+                <span id="Motorchenang">0</span>
+                <label>Ngưỡng độ ẩm dưới: <span id="nguongdoamduoi"></span></label>
+                <input type="range" id="slider3" min="0" max="100" step="1" value="nguongdoamduoi">
+                <label>Ngưỡng độ ẩm trên: <span id="nguongdoamtren"></span></label>
+                <input type="range" id="slider2" min="0" max="100" step="1" value="nguongdoamtren">
+                <label>Ngưỡng nhiệt độ dưới: <span id="nguongnhietdoduoi"></span></label>
+                <input type="range" id="slider5" min="0" max="100" step="1" value="nguongnhietdoduoi">
+                <label>Ngưỡng nhiệt độ trên: <span id="nguongnhietdotren"></span></label>
+                <input type="range" id="slider4" min="0" max="100" step="1" value="nguongnhietdotren">
+                
+                <audio src="audio/nhac.mp3" autoplay controls type="audio/mp3"></audio>
+              </div>
+            </div>
+
+          </div>
+          
+        </div>
+
+        <div id="menu_2" class="tab-content-item">
+          <h2>Điều kiện môi trường phù hợp</h2>
+          <table style="width:30%">
+            <tr>
+              <th>Nhiệt độ &#127777</th>
+              <th>Độ ẩm 	&#127781</th>
+              <th>Độ pH &#127793</th>
+            </tr>
+            <tr>
+              <td>Tối ưu từ 18 - 28*C</td>
+              <td>Nhỏ hơn 70%</td>
+              <td>6,2 – 6,5</td>
+            </tr>
+          </table>
+          <p> </p>
+          <div class="container"><img src="image/hd1.jpg" alt="image"></div>
+          <h2>Những lưu ý trước khi trồng dưa lưới tại nhà</h2>
+          <p><b>Lựa chọn tháng thích hợp để trồng dưa lưới.</b></p>
+          <p>Thời gian thích hợp để bạn trồng dưa lưới là vào khoảng từ tháng 2 đến tháng 9. Tuy nhiên thời gian lý tưởng nhất vẫn là 2 thời điểm sau: Tháng 2-3, khi bạn trồng vào thời điểm này thì sẽ thu hoạch vào cuối tháng 4 hoặc sang tháng 5. Tháng 8,9 dương lịch và thời điểm thu hoạch là vào tháng 11-12.</p>
+          <p>Không nên trồng dưa lưới vào thời điểm thời tiết lạnh vì cây dễ bị sâu bệnh, tỷ lệ cây sống, phát triển không cao.</p>
+          <div class="container" width=800px height=500px><object  data="image/yasuo.jpg"></object></div>
+          <p><b>Chọn hạt giống dưa lưới</b></p>
+          <p>Khi chọn hạt dưa lưới bạn nên chọn loại hạt F1 thuần chủng, loại hạt này sẽ cho tỉ lệ nảy mầm cao và cho ra quả to ngọt. Không nên chọn mua loại hạt giống lai ghép, không có thương hiệu rõ ràng loại hạt này có tỉ lệ nảy mầm thấp và quả cũng không được sai.</p>
+          <p><b>Lựa chọn vị trí trồng</b></p>
+          <p>Dưa lưới vốn là cây ưa sáng nên bạn nên trồng cây ở những vị trí có nhiều ánh sáng, rộng rãi. Có thể tận dụng khoảng sân trước nhà, trên sân thượng hoặc ban công đều được. Không nên trồng cây ở những nơi râm, chật hẹp thì cây sẽ khó phát triển và ra ít trái.</p>
+          <div class="container"><img src="image/hd2.jpg" alt="image"></div>
+          <p><b>Chuẩn bị đất trồng</b></p>
+          <p>Để dưa lưới có điều kiện phát triển tốt thì bạn cần chú ý chọn đất trồng dưa phải giàu dinh dưỡng, tơi xốp, dễ thoát nước, chẳng hạn như: Đất sạch trộn với phân trùn quế, dịch trùn quế, xơ dừa. Bạn có thể mua loại đất trồng dưa ở các cửa hàng bán cây cảnh.</p> <p> Ngoài ra bạn có thể tự trộn đất trồng dưa lưới bằng cách: Lấy xỉ than tổ ong, ngâm nước một ngày một đêm. Vài tiếng bạn lại thay nước để loại bỏ tạp chất trong than. Tiếp đến bạn vớt than ra trộn theo tỉ lệ 40% đất thêm 40% xỉ than thêm 20% trấu trộn đều lại với nhau là xong.</p>
+          <p><b>Chuẩn bị chậu trồng dưa lưới</b></p>
+          <p>Bạn có thể chọn thùng xốp hoặc thùng nhựa để trồng dưa lưới, tuy nhiên cần lưu ý phải đục lỗ ở dưới đáy thùng để tăng khả năng thoát nước, tạo sự thông thoáng trao đổi oxy vào trong đất, để cây không bị ngập úng và phát triển tốt. Giúp cây không bị ngập úng, và phát triển tốt.</p>
+          <p> </p>
+          <h2><b>CLIP HƯỚNG DẪN</b></h2>
+          <div class="container"><video width="800" controls>
+            <source src="video/clip.mp4" type="video/mp4">
+          </video></div>
+          
+        </div>
+
+        <div id="menu_3" class="tab-content-item">
+          <h2>Hình ảnh cây sinh trưởng</h2>
+          <p> </p>
+          <div class="container"><img width="400" height="500" src="image/theodoi1.jpg" alt="image"></div>
+          <p> </p>
+          <div class="container"><img width="400" height="500" src="image/theodoi2.jpg" alt="image"></div>
+          <p> </p>
+          <div class="container"><img width="400" height="500" src="image/theodoi3.jpg" alt="image"></div>
+          <p> </p>
+          <div class="container"><img width="400" height="500" src="image/theodoi4.jpg" alt="image"></div>
+          <p> </p>
+          <div class="container"><img width="400" height="500" src="image/theodoi5.jpg" alt="image"></div>
+          <img src="https://firebasestorage.googleapis.com/v0/b/james-ly-7c333.appspot.com/o/data%2Fphoto5.jpg?alt=media&token=eb8f0c97-b7b3-4ade-bcae-afc4d001e49b&fbclid=IwAR2XX7HfQHI_SAQUYtDvRBk1hdd2e-LZyB0JhB-hRB923mx-d_mnW_Wcq4M" alt="Hình ảnh">
+        </div>
+
+        <div id="menu_4" class="tab-content-item">
+          <canvas id="myCanvas" width="400" height="66"></canvas>
+          <script>
+            var canvas = document.getElementById('myCanvas');
+            var ctx = canvas.getContext('2d');
+            var colors = ['#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#00FFFF', '#0000FF', '#8B00FF']; // Mảng các màu sắc
+            var text = 'THÔNG TIN LIÊN LẠC'; // Nội dung văn bản
+            var currentColorIndex = 0; // Chỉ số màu sắc hiện tại
+
+            function draw() {
+              // Xóa khung trước khi vẽ lại
+              ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+              // Vẽ khung vuông với màu sắc hiện tại
+              ctx.strokeStyle = colors[currentColorIndex];
+              ctx.lineWidth = 8;  
+              ctx.strokeRect(8, 8, 384, 50); //QUA LEN KICH THƯỚC
+
+              // Viết nội dung văn bản
+              ctx.fillStyle = '#000'; // Màu chữ
+              ctx.font = '20px Arial'; // Font chữ
+              ctx.textAlign = 'center'; // Căn giữa theo chiều ngang
+              ctx.textBaseline = 'middle'; // Căn giữa theo chiều dọc
+              ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+
+              // Thay đổi màu sắc hiện tại
+              currentColorIndex++;
+              if (currentColorIndex >= colors.length) {
+                currentColorIndex = 0;
+              }
+
+              // Lặp lại vẽ sau một khoảng thời gian
+              setTimeout(draw, 500);
+            }
+
+            // Gọi hàm vẽ
+            draw();
+          </script>
+
+          <ul>
+            <li>Số điện thoại: 0907388204</li>
+            <li>Email: longdhx@gmail.com</li>
+            <li><a href="https://www.facebook.com/longdo1001/"  target="_blank"><b>Facebook của tôi.</b></a></li>
+          </ul>
+          <hr>
+        </div>
+      </div>
+        <!--
+        <div class="footer">
+          <h2>Footer</h2>
+        </div>-->
+  </body>
+</div>
+
+  <script>
+    function login() {
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+      
+
+      if (username === 'admin' && password === '123') {
+        // Đăng nhập thành công
+        document.getElementById('contentContainer').style.display = 'block';
+        document.querySelector('.login-container').style.display = 'none';
+        incrementFirebase();
+      } else {
+        // Đăng nhập không thành công
+        alert("Đăng nhập không thành công. Vui lòng kiểm tra lại tài khoản và mật khẩu.");
+      }
+    }
+
+    function logout() {
+      document.getElementById('contentContainer').style.display = 'none';
+      // Các tác vụ đăng xuất khác (nếu có)
+      document.querySelector('.login-container').style.display = 'block';
+      window.location.reload();
+    }
+  </script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function(){
+        $('.tab-content-item').hide();
+        $('.tab-content-item:first-child').fadeIn();
+        $('.nav-tabs li').click(function(){
+            //Active nav tabs
+            $('.nav-tabs li').removeClass('active');
+            $(this).addClass('active');
+
+            //Show tab-content
+            let id_tab_content = $(this).children('a').attr('href');
+            $('.tab-content-item').hide();
+            $(id_tab_content).fadeIn();
+            return false;
+        });
+    });
+</script>
+
+<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-database.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-analytics.js"></script>
+<!-- Thêm thư viện Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js"></script>
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+   
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyCLSrfZKkNFOgUVrlXxtzu41QcuG8aCarQ",
+      authDomain: "longmon-5ed38.firebaseapp.com",
+      databaseURL: "https://longmon-5ed38-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "longmon-5ed38",
+      storageBucket: "longmon-5ed38.appspot.com",
+      messagingSenderId: "353188420960",
+      appId: "1:353188420960:web:6d956c35cce670c8669205",
+      measurementId: "G-VN1WBPCDGG"
+    };
+      
+    /*// Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    
+  
+    var nhietdo = document.getElementById('UsersData/MVylscC03cREY1Yh5dxGCT3tIJ52/readings/nhietdo');
+    var dbRef = firebase.database().ref().child('UsersData/MVylscC03cREY1Yh5dxGCT3tIJ52/readings/nhietdo');
+
+    var doAm = document.getElementById('UsersData/MVylscC03cREY1Yh5dxGCT3tIJ52/readings/doam');
+    var dbRef2 = firebase.database().ref().child('doam');
+    
+    var luotdangnhap = document.getElementById('luotdangnhap');
+    var dbRef3 = firebase.database().ref().child('luotdangnhap');
+    
+    var gas = document.getElementById('UsersData/MVylscC03cREY1Yh5dxGCT3tIJ52/readings/gas');
+    var dbRef4 = firebase.database().ref().child('gas');
+    dbRef.on('text', snap => nhietdo.innerText = snap.text());
+    dbRef2.on('value', snap => doam.innerText = snap.val());
+    dbRef3.on('value', snap => luotdangnhap.innerText = snap.val());
+    dbRef4.on('value', snap => gas.innerText = snap.val());*/
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+
+    var nhietdoElement = document.getElementById('nhietdo');
+    var dbRef = firebase.database().ref().child('UsersData/MVylscC03cREY1Yh5dxGCT3tIJ52/readings/nhietdo');
+
+    var doamElement = document.getElementById('doam');
+    var dbRef2 = firebase.database().ref().child('UsersData/MVylscC03cREY1Yh5dxGCT3tIJ52/readings/doam');
+
+    var luotdangnhapElement = document.getElementById('luotdangnhap');
+    var dbRef3 = firebase.database().ref().child('luotdangnhap');
+
+    var gasElement = document.getElementById('gas');
+    var dbRef4 = firebase.database().ref().child('UsersData/MVylscC03cREY1Yh5dxGCT3tIJ52/readings/gas');
+
+    var button_ndoElement = document.getElementById('button_ndo');
+    var dbRef5 = firebase.database().ref().child('button_ndo');
+
+    var button_damElement = document.getElementById('button_dam');
+    var dbRef6 = firebase.database().ref().child('button_dam');
+
+    var nguongdoamtrenElement = document.getElementById('nguongdoamtren');
+    var dbRef7 = firebase.database().ref().child('nguongdoamtren');
+
+    var nguongdoamduoiElement = document.getElementById('nguongdoamduoi');
+    var dbRef8 = firebase.database().ref().child('nguongdoamduoi');
+
+    var nguongnhietdotrenElement = document.getElementById('nguongnhietdotren');
+    var dbRef9 = firebase.database().ref().child('nguongnhietdotren');
+
+    var nguongnhietdoduoiElement = document.getElementById('nguongnhietdoduoi');
+    var dbRef10 = firebase.database().ref().child('nguongnhietdoduoi');
+
+
+
+    dbRef.on('value', function(snapshot) {
+      var nhietdoValue = snapshot.val(); // Lấy giá trị nhiệt độ từ snapshot
+      if (typeof nhietdoValue === 'string') {
+        nhietdoElement.innerText = nhietdoValue; // Cập nhật giá trị nhiệt độ vào phần tử HTML
+        var threshold_ndo = 50; // Giá trị ngưỡng bạn đặt trước
+
+        if (nhietdoValue > threshold_ndo) {
+          //showNotification();
+          alert('Giá trị nhiệt độ vượt qua ngưỡng!');
+        }
+        else {
+          //hideNotification();
+        }
+    }
+    });
+
+    dbRef2.on('value', function(snapshot) {
+      var doamValue = snapshot.val(); // Lấy giá trị nhiệt độ từ snapshot
+      if (typeof doamValue === 'string') {
+        doamElement.innerText = doamValue; // Cập nhật giá trị nhiệt độ vào phần tử HTML
+        var threshold_dam = 50; // Giá trị ngưỡng bạn đặt trước
+
+        if (doamValue > threshold_dam) {
+          //showNotification();
+          alert('Giá trị độ ẩm vượt qua ngưỡng!');
+        }
+        else {
+          //hideNotification();
+        }
+      }
+    });
+
+    dbRef3.on('value', snap => luotdangnhap.innerText = snap.val());
+
+
+    dbRef4.on('value', function(snapshot) {
+      var gasValue = snapshot.val();
+      if (typeof gasValue === 'string') {
+        gasElement.innerText = gasValue; // Cập nhật giá trị nhiệt độ vào phần tử HTML
+      }
+    });
+
+    dbRef5.on('value', snap => button_ndo.innerText = snap.val());
+
+    dbRef6.on('value', snap => button_dam.innerText = snap.val());
+
+    dbRef7.on('value', snap => nguongdoamtren.innerText = snap.val());
+
+    dbRef8.on('value', snap => nguongdoamduoiElement.innerHTML =  snap.val());
+
+    dbRef9.on('value', snap => nguongnhietdotrenElement.innerHTML =  snap.val());
+
+    dbRef10.on('value', snap => nguongnhietdoduoiElement.innerHTML =  snap.val());
+
+
+
+    
+// Hiển thị thông báo
+function showNotification() {
+  document.getElementById('overlay').style.display = 'flex';
+}
+
+// Ẩn thông báo
+function hideNotification() {
+  document.getElementById('overlay').style.display = 'none';
+}
+</script>
+
+<script>
+  // Khởi tạo Firebase
+  //firebase.initializeApp(firebaseConfig);
+
+  // Tham chiếu đến Firebase Storage
+  const storage = firebase.storage();
+  const storageRef = storage.ref();
+
+  // Lấy URL hình ảnh từ Firebase Storage và hiển thị lên trang HTML
+  const imageRef = storageRef.child('1.jpg');
+  imageRef.getDownloadURL().then((url) => {
+    const imageElement = document.getElementById('image');
+    imageElement.src = url;
+  }).catch((error) => {
+    console.log('Lỗi khi lấy URL hình ảnh:', error);
+  });
+</script>
+
+<script>
+  // Khởi tạo Firebase
+  //firebase.initializeApp(firebaseConfig);
+
+  function incrementFirebase() {
+    // Truy xuất đến đường dẫn cần tăng giá trị trong Firebase
+    var databaseRef = firebase.database().ref('luotdangnhap');
+
+    // Sử dụng phương thức transaction() để tăng giá trị lên 1
+    databaseRef.transaction(function(currentValue) {
+      return (currentValue || 0) + 1;
+    });
+  }
+</script>
+
+<script>
+  // Khởi tạo Firebase
+  //firebase.initializeApp(firebaseConfig);
+
+  // Hàm thay đổi trạng thái khi nhấn nút "On/Off"
+  function toggleOnOff() {
+    // Lấy reference đến nút trạng thái trên Firebase
+    var statusRef = firebase.database().ref('button_ndo');
+    statusRef.transaction(function(currentStatus) {
+      return currentStatus === 1 ? 0 : 1;
+    });
+  }
+  </script>
+
+<script>
+// Khởi tạo Firebase
+//firebase.initializeApp(firebaseConfig);
+
+// Hàm thay đổi trạng thái khi nhấn nút "On/Off"
+function toggleOnOff1() {
+  // Lấy reference đến nút trạng thái trên Firebase
+  var statusRef1 = firebase.database().ref('button_dam');
+  statusRef1.transaction(function(currentStatus1) {
+    return currentStatus1 === 1 ? 0 : 1;
+  });
+}
+
+// Tắt liên kết với Firebase
+    function disconnectFirebase() {
+      firebase.app().delete().then(function() {
+        console.log("Đã tắt liên kết với Firebase.");
+        // Thực hiện các tác vụ khác (nếu cần) sau khi đã tắt liên kết
+      }).catch(function(error) {
+        console.error("Lỗi khi tắt liên kết với Firebase:", error);
+      });
+    }
+
+    // Liên kết lại với Firebase
+    function reconnectFirebase() {
+      if (!firebaseApp) {
+        firebaseApp = firebase.initializeApp(firebaseConfig);
+        console.log("Đã liên kết lại với Firebase.");
+        // Thực hiện các tác vụ khác (nếu cần) sau khi đã liên kết lại
+      } else {
+        console.log("Đã liên kết với Firebase trước đó.");
+      }
+    }
+    
+
+    // Lấy tham chiếu đến nút slider và span hiển thị giá trị
+    var slider = document.getElementById('slider');
+    var sliderValue = document.getElementById('Motormaybomnuoc');
+    var slider1 = document.getElementById('slider1');
+    var sliderValue1 = document.getElementById('Motorchenang');
+    var slider2 = document.getElementById('slider2');
+    var sliderValue2 = document.getElementById('nguongdoamtren');
+    var slider3 = document.getElementById('slider3');
+    var sliderValue3 = document.getElementById('nguongdoamduoi');
+    var slider4 = document.getElementById('slider4');
+    var sliderValue4 = document.getElementById('nguongnhietdotren');
+    var slider5 = document.getElementById('slider5');
+    var sliderValue5 = document.getElementById('nguongnhietdoduoi');
+    //máy bơm nước
+    // Gán sự kiện thay đổi giá trị của slider
+    slider.addEventListener('input', function() {
+      // Lấy giá trị hiện tại của slider
+      var value = slider.value;
+      
+
+      // Hiển thị giá trị trên span
+      sliderValue.innerHTML = value;
+
+      // Gửi giá trị lên Firebase
+      sendValueToFirebase(value);
+    });
+
+    function sendValueToFirebase(value) {
+      // Lấy tham chiếu đến nút dữ liệu trên Firebase (ví dụ: 'sliderValue')
+      var dbRef = firebase.database().ref().child('Motormaybomnuoc');
+
+      // Cập nhật giá trị lên Firebase
+      dbRef.set(value);
+    }
+  
+     //Che nắng
+      // Gán sự kiện thay đổi giá trị của slider
+      slider1.addEventListener('input', function() {
+      // Lấy giá trị hiện tại của slider
+      var value1 = slider1.value;
+      
+      // Hiển thị giá trị trên span
+      sliderValue1.innerHTML = value1;
+
+      // Gửi giá trị lên Firebase
+      sendValue1ToFirebase(value1);
+    });
+
+    function sendValue1ToFirebase(value1) {
+      // Lấy tham chiếu đến nút dữ liệu trên Firebase (ví dụ: 'sliderValue')
+      var dbRef1 = firebase.database().ref().child('Motorchenang');
+
+      // Cập nhật giá trị lên Firebase
+      dbRef1.set(value1);
+    }
+
+    //doam tren
+      // Gán sự kiện thay đổi giá trị của slider
+      slider2.addEventListener('input', function() {
+      // Lấy giá trị hiện tại của slider
+      var value2 = slider2.value;
+      
+      // Hiển thị giá trị trên span
+      if (typeof Value2 === 'string') {
+      sliderValue2.innerNumber = value2;}
+
+      // Gửi giá trị lên Firebase
+      sendValue2ToFirebase(value2);
+    });
+
+    function sendValue2ToFirebase(value2) {
+      // Lấy tham chiếu đến nút dữ liệu trên Firebase (ví dụ: 'sliderValue')
+      var dbRef2 = firebase.database().ref().child('nguongdoamtren');
+
+      // Cập nhật giá trị lên Firebase
+      dbRef2.set(value2);
+    }
+
+
+        //doam duoi
+      // Gán sự kiện thay đổi giá trị của slider
+      slider3.addEventListener('input', function() {
+      // Lấy giá trị hiện tại của slider
+      var value3 = slider3.value;
+      
+      // Hiển thị giá trị trên span
+      sliderValue3.innerHTML = value3;
+
+      // Gửi giá trị lên Firebase
+      sendValue3ToFirebase(value3);
+    });
+
+    function sendValue3ToFirebase(value3) {
+      // Lấy tham chiếu đến nút dữ liệu trên Firebase (ví dụ: 'sliderValue')
+      var dbRef3 = firebase.database().ref().child('nguongdoamduoi');
+
+      // Cập nhật giá trị lên Firebase
+      dbRef3.set(value3);
+    }
+
+        //nhietdo tren
+      // Gán sự kiện thay đổi giá trị của slider
+      slider4.addEventListener('input', function() {
+      // Lấy giá trị hiện tại của slider
+      var value4 = slider4.value;
+      
+      // Hiển thị giá trị trên span
+      sliderValue4.innerHTML = value4;
+
+      // Gửi giá trị lên Firebase
+      sendValue4ToFirebase(value4);
+    });
+
+    function sendValue4ToFirebase(value4) {
+      // Lấy tham chiếu đến nút dữ liệu trên Firebase (ví dụ: 'sliderValue')
+      var dbRef4 = firebase.database().ref().child('nguongnhietdotren');
+
+      // Cập nhật giá trị lên Firebase
+      dbRef4.set(value4);
+    }
+
+        //nhiet do duoi
+      // Gán sự kiện thay đổi giá trị của slider
+      slider5.addEventListener('input', function() {
+      // Lấy giá trị hiện tại của slider
+      var value5 = slider5.value;
+      
+      // Hiển thị giá trị trên span
+      sliderValue5.innerHTML = value5;
+
+      // Gửi giá trị lên Firebase
+      sendValue5ToFirebase(value5);
+    });
+
+    function sendValue5ToFirebase(value5) {
+      // Lấy tham chiếu đến nút dữ liệu trên Firebase (ví dụ: 'sliderValue')
+      var dbRef5 = firebase.database().ref().child('nguongnhietdoduoi');
+
+      // Cập nhật giá trị lên Firebase
+      dbRef5.set(value5);
+    }
+
+
+    function resetSlider() {
+      // Thiết lập giá trị của slider về 0
+      slider.value = 0;
+      slider1.value = 0;
+
+      // Hiển thị giá trị trên span
+      sliderValue.innerHTML = 0;
+      sliderValue1.innerHTML = 0;
+
+      // Gửi giá trị 0 lên Firebase
+      sendValueToFirebase(0);
+      sendValue1ToFirebase(0);
+    }
+</script>
+
+
+
+</body>
+</html>
