@@ -14,8 +14,7 @@ Every part of this project is a sample code that shows how to do the following:
 ## Project Overview
 
 <img src="https://github.com/jamesli72/Crop-Monitoring-IoT-Basic/assets/141984131/7d195c78-aa67-4692-b943-e07149b08055" width="500" height="500">
-\
-\
+
 ## System diagram && video demo
 
 Diagram here
