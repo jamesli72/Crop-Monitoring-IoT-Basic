@@ -1,7 +1,7 @@
-## An Immediate IoT Project For Student
+## An intermediate IoT Project For Student
 
 ## Learn how to build an IoT System with many sensors and actuators, create a basic web server and application to view the data
-This project was upgraded when I was doing a project at the university, it is simple to learn and write some immediate code for an IoT application system.
+This project was upgraded when I was doing a project at the university, it is simple to learn and write some intermediate code for an IoT application system.
 Every part of this project is a sample code that shows how to do the following:
 
 *Create a custom web server with traditional HTML, CSS, and JS.
@@ -25,7 +25,6 @@ Diagram here
 Watch this video!!
 \
 [![IoT Immediate](https://i9.ytimg.com/vi_webp/Vykp29GQEq8/mqdefault.webp?v=65e16627&sqp=CIDLha8G&rs=AOn4CLA-iQrZQFoSkVg5V1iSr3iYIcc2_A)](https://www.youtube.com/watch?v=Vykp29GQEq8&t=4s)
-\
 
 ## How to run this project on VSCode
 It's pretty simple
