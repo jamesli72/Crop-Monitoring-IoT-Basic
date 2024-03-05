@@ -38,4 +38,4 @@ Since this is an application project, I suggest you clone and rename it for your
 
 ## Known issues
 
-If you found an issue or would like to submit an improvement for this project, please submit a file through this email lygiahuy561@gmail.com
+If you found an issue or would like to submit an improvement for this project, please checkout the issue section.
